@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": "123",
+      "status": "Nuevo | +1000 vendidos",
+      "title": "Samsung Galaxy A55 5G Dual SIM 256 GB azul oscuro 8 GB RAM",
+      "price": "US$ 439",
+      "shippingInfo": "Envío gratis a todo el país",
+      "stock": "Disponible",
+      "sellerInfo": "Tienda Oficial Samsung",
+      "paymentMethods": ["Visa", "OCA"],
+      "features": {
+        "Tamaño de la pantalla": "6.6 pulgadas",
+        "Memoria interna": "256 GB",
+        "Cámara": "50 MP"
+      },
+      "description": "El Samsung Galaxy A55 5G es un smartphone de última generación con una pantalla impresionante, gran capacidad de almacenamiento y una cámara de alta resolución para capturar tus mejores momentos."
+    }
+  ]
+}
