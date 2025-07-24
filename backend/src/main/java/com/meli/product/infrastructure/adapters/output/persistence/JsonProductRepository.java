@@ -1,29 +1,27 @@
-package com.meli.product;
+package com.meli.product.infrastructure.adapters.output.persistence;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.product.domain.Product;
+import com.meli.product.domain.ProductRepository;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
-
 import java.util.Map;
 
+@Repository
+public class JsonProductRepository implements ProductRepository {
 
-@RestController
-@RequestMapping("/api/items")
-public class ProductController {
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public JsonProductRepository(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
-    @GetMapping("/{id}")
-    public Mono<Product> getProductById(@PathVariable String id) {
-
-
+    @Override
+    public Mono<Product> findById(String id) {
         return Mono.fromCallable(() -> {
             try {
                 ClassPathResource resource = new ClassPathResource("data.json");
@@ -40,7 +38,7 @@ public class ProductController {
                         product.setShippingInfo(productNode.path("shippingInfo").asText());
                         product.setStock(productNode.path("stock").asText());
                         product.setSellerInfo(productNode.path("sellerInfo").asText());
-                        
+
                         // Payment Methods
                         JsonNode paymentMethodsNode = productNode.path("paymentMethods");
                         if (paymentMethodsNode.isArray()) {
@@ -62,20 +60,7 @@ public class ProductController {
                         return product;
                     }
                 }
-                //TODO: Retirar - para pruebas
-                // Si no se encuentra el producto, retorna un producto dummy
-                Product dummyProduct = new Product();
-                dummyProduct.setId("dummy");
-                dummyProduct.setStatus("available");
-                dummyProduct.setTitle("Producto Dummy");
-                dummyProduct.setPrice("0.00");
-                dummyProduct.setShippingInfo("Envío estándar");
-                dummyProduct.setStock("100");
-                dummyProduct.setSellerInfo("Vendedor Dummy");
-                dummyProduct.setPaymentMethods(new String[]{"Efectivo", "Tarjeta"});
-                dummyProduct.setFeatures(Map.of("color", "rojo", "tamaño", "mediano"));
-                dummyProduct.setDescription("Este es un producto dummy de ejemplo.");
-                return dummyProduct;
+                return null; // Or throw an exception if the product is not found
             } catch (IOException e) {
                 throw new RuntimeException("Error reading data.json", e);
             }

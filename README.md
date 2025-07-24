@@ -9,6 +9,12 @@ This repository contains a full-stack application simulating a Mercado Libre pro
 *   `docker-compose.yml`: Defines the multi-container Docker application.
 *   `prometheus/`: Prometheus configuration for monitoring.
 *   `grafana/`: Grafana configuration for visualizing metrics.
+*   `docs/`: Project documentation.
+
+## Documentation
+
+*   [Backend Microservice Architecture](docs/backend-architecture.md): Detailed explanation of the backend's hexagonal architecture.
+*   [Backend Microservice Runbook](docs/backend-runbook.md): Comprehensive guide for setup, testing, maintenance, and support of the backend.
 
 ## Prerequisites
 
@@ -43,7 +49,7 @@ Before running the application, ensure you have the following installed:
 Once all services are up and running:
 
 *   **Frontend Application:** Access the product page at `http://localhost`
-*   **Traefik Dashboard:** View the Traefik dashboard at `http://localhost:8080/api`
+*   **Traefik Dashboard:** View the Traefik dashboard at `http://localhost:8080/dashboard`
 *   **Prometheus Dashboard:** Access Prometheus at `http://localhost:9090`
 *   **Grafana Dashboard:** Access Grafana at `http://localhost:3001` (default credentials: `admin`/`admin`)
 
