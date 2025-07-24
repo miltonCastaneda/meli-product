@@ -1,0 +1,30 @@
+# Backend
+.gradle
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+*~
+*.swp
+.idea
+.project
+.classpath
+.settings
+bin
+
+# Frontend
+node_modules/
+dist/
+.DS_Store
+npm-debug.log*
+yarn-error.log
+.env
+
+# IDE files
+.vscode/
+*.iml
+
+# OS files
+Thumbs.db
