@@ -30,6 +30,8 @@ WORKDIR /app
 
 # Crear un usuario no-root por seguridad
 RUN addgroup --system spring && adduser --system --ingroup spring spring
+# Crear el directorio de logs y asignar permisos al usuario 'spring'
+RUN mkdir -p /app/logs && chown spring:spring /app/logs
 USER spring:spring
 
 # Copiar únicamente el JAR construido desde la etapa anterior

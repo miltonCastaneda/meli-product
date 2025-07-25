@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  meli-network:
+    driver: bridge
+
 services:
   traefik:
     image: traefik:v2.10
@@ -16,6 +20,8 @@ services:
       - "8080:8080" # Traefik Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - meli-network
 
   backend:
     build:
@@ -28,6 +34,8 @@ services:
       - "traefik.http.routers.backend.rule=Host(`localhost`) && PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - "traefik.http.services.backend.loadbalancer.server.port=8080"
+    networks:
+      - meli-network
     depends_on:
       - traefik
 
@@ -40,6 +48,8 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`localhost`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+    networks:
+      - meli-network
     depends_on:
       - traefik
 
@@ -51,6 +61,8 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+    networks:
+      - meli-network
     depends_on:
       - backend
 
@@ -61,5 +73,27 @@ services:
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
     ports:
       - "3001:3000"
+    networks:
+      - meli-network
     depends_on:
       - prometheus
+
+  loki:
+    image: grafana/loki:2.9.0
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - meli-network
+
+  promtail:
+    image: grafana/promtail:2.9.0
+    volumes:
+      - ./promtail:/etc/promtail
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/promtail-config.yml
+    networks:
+      - meli-network
