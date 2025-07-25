@@ -72,7 +72,8 @@ public class RequestLoggingFilter implements WebFilter {
             Duration duration = Duration.between(start, end);
 
             logger.info(
-                    "Request: method={}, uri={}, headers={}, body={}, status={}, duration={}ms, responseHeaders={}, responseBody={}",
+                   // "Request: method={}, uri={}, headers={}, body={}, status={}, duration={}ms, responseHeaders={}, responseBody={}",
+                    "Request: method={}, uri={},  body={}, status={}, duration={}ms",
                     request.getMethod(),
                     request.getURI(),
                    // request.getHeaders(),

@@ -33,7 +33,13 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`localhost`) && PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.routers.backend.middlewares=resilience-middlewares"
+      - "traefik.http.middlewares.resilience-middlewares.chain.middlewares=retry-policy,circuit-breaker"
+      - "traefik.http.middlewares.retry-policy.retry.attempts=2"
+      - "traefik.http.middlewares.circuit-breaker.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
       - "traefik.http.services.backend.loadbalancer.server.port=8080"
+      - "traefik.http.services.backend.loadbalancer.healthcheck.path=/actuator/health"
+      - "traefik.http.services.backend.loadbalancer.healthcheck.interval=10s"
     networks:
       - meli-network
     depends_on:
