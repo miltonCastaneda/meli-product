@@ -31,3 +31,10 @@ Thumbs.db
 
 # Logging
 loki-data/
+
+# Playwright
+frontend/playwright-report/
+frontend/test-results/
+
+# Other generated files
+/.last-run.json
