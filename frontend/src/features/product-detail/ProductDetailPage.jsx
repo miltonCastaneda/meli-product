@@ -5,7 +5,8 @@ import { Share2 } from '../../components/icons';
 import { Breadcrumbs, ImageGallery, ProductMiddleInfo, ProductActionPanel, RightSidePanels, ProductCarousel, ProductCharacteristics, ProductDescription, SidebarRelatedProducts } from './components';
 
 export const ProductDetailPage = () => {
-  const { product, loading, error } = useProductData();
+  const productId = window.location.pathname.split('/').pop();
+  const { product, loading, error } = useProductData(productId);
   const [showToast, setShowToast] = useState(false);
 
   const handleActionClick = () => {
@@ -38,7 +39,7 @@ export const ProductDetailPage = () => {
   }
 
   if (!product) {
-    return <div className="text-center text-gray-500 mt-10">No product data available.</div>;
+    return <div className="text-center text-gray-500 mt-10">No product data available. test with http://localhost/MLA123456789 </div>;
   }
 
   return (

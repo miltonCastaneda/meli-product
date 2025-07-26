@@ -1,31 +1,31 @@
 package com.meli.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 @Schema(description = "Details about a product")
 public class Product {
-    @Schema(description = "Unique identifier of the product", example = "123")
+    @Schema(description = "Unique identifier of the product", example = "MLA123456789")
     private String id;
-    @Schema(description = "Status of the product (e.g., New, Used)", example = "Nuevo | +1000 vendidos")
-    private String status;
-    @Schema(description = "Title of the product", example = "Samsung Galaxy A55 5G Dual SIM 256 GB azul oscuro 8 GB RAM")
+    private String condition;
+    @JsonProperty("sold_quantity")
+    private Integer soldQuantity;
     private String title;
-    @Schema(description = "Price of the product", example = "US$ 439")
-    private String price;
-    @Schema(description = "Shipping information for the product", example = "Envío gratis a todo el país")
-    private String shippingInfo;
-    @Schema(description = "Stock availability of the product", example = "Disponible")
-    private String stock;
-    @Schema(description = "Information about the seller", example = "Tienda Oficial Samsung")
-    private String sellerInfo;
-    @Schema(description = "Available payment methods", example = "[\"Visa\", \"OCA\"]")
-    private String[] paymentMethods;
-    @Schema(description = "Key features of the product", example = "{\"Tamaño de la pantalla\": \"6.6 pulgadas\", \"Memoria interna\": \"256 GB\", \"Cámara\": \"50 MP\"}")
-    private Map<String, String> features;
-    @Schema(description = "Detailed description of the product", example = "El Samsung Galaxy A55 5G es un smartphone de última generación con una pantalla impresionante, gran capacidad de almacenamiento y una cámara de alta resolución para capturar tus mejores momentos.")
+    private Price price;
+    @JsonProperty("original_price")
+    private Double originalPrice;
+    @JsonProperty("discount_percentage")
+    private Integer discountPercentage;
+    private List<String> images;
+    private Seller seller;
+    private Shipping shipping;
+    private Integer stock;
+    private Rating rating;
+    @JsonProperty("key_features")
+    private List<String> keyFeatures;
+    private List<Characteristic> characteristics;
     private String description;
 
     // Getters and Setters
@@ -37,12 +37,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public Integer getSoldQuantity() {
+        return soldQuantity;
+    }
+
+    public void setSoldQuantity(Integer soldQuantity) {
+        this.soldQuantity = soldQuantity;
     }
 
     public String getTitle() {
@@ -53,52 +61,84 @@ public class Product {
         this.title = title;
     }
 
-    public String getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 
-    public String getShippingInfo() {
-        return shippingInfo;
+    public Double getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setShippingInfo(String shippingInfo) {
-        this.shippingInfo = shippingInfo;
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
-    public String getStock() {
+    public Integer getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(Integer discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public Shipping getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(Shipping shipping) {
+        this.shipping = shipping;
+    }
+
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public String getSellerInfo() {
-        return sellerInfo;
+    public Rating getRating() {
+        return rating;
     }
 
-    public void setSellerInfo(String sellerInfo) {
-        this.sellerInfo = sellerInfo;
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
-    public String[] getPaymentMethods() {
-        return paymentMethods;
+    public List<String> getKeyFeatures() {
+        return keyFeatures;
     }
 
-    public void setPaymentMethods(String[] paymentMethods) {
-        this.paymentMethods = paymentMethods;
+    public void setKeyFeatures(List<String> keyFeatures) {
+        this.keyFeatures = keyFeatures;
     }
 
-    public Map<String, String> getFeatures() {
-        return features;
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
     }
 
-    public void setFeatures(Map<String, String> features) {
-        this.features = features;
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 
     public String getDescription() {
@@ -115,21 +155,24 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
-                Objects.equals(status, product.status) &&
+                Objects.equals(condition, product.condition) &&
+                Objects.equals(soldQuantity, product.soldQuantity) &&
                 Objects.equals(title, product.title) &&
                 Objects.equals(price, product.price) &&
-                Objects.equals(shippingInfo, product.shippingInfo) &&
+                Objects.equals(originalPrice, product.originalPrice) &&
+                Objects.equals(discountPercentage, product.discountPercentage) &&
+                Objects.equals(images, product.images) &&
+                Objects.equals(seller, product.seller) &&
+                Objects.equals(shipping, product.shipping) &&
                 Objects.equals(stock, product.stock) &&
-                Objects.equals(sellerInfo, product.sellerInfo) &&
-                Arrays.equals(paymentMethods, product.paymentMethods) &&
-                Objects.equals(features, product.features) &&
+                Objects.equals(rating, product.rating) &&
+                Objects.equals(keyFeatures, product.keyFeatures) &&
+                Objects.equals(characteristics, product.characteristics) &&
                 Objects.equals(description, product.description);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, status, title, price, shippingInfo, stock, sellerInfo, features, description);
-        result = 31 * result + Arrays.hashCode(paymentMethods);
-        return result;
+        return Objects.hash(id, condition, soldQuantity, title, price, originalPrice, discountPercentage, images, seller, shipping, stock, rating, keyFeatures, characteristics, description);
     }
 }
