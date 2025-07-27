@@ -57,7 +57,7 @@ Once all services are up and running:
 
 *   **Frontend Application:** Access the product page at `http://localhost`
     *   **Test Route:** `http://localhost/MLA123456789` (example product detail page)
-*   **Traefik Dashboard:** View the Traefik dashboard at `http://localhost:8080/dashboard`
+*   **Traefik Dashboard:** View the Traefik(api gateway) dashboard at `http://localhost:8080/dashboard`
 *   **Prometheus Dashboard:** Access Prometheus at `http://localhost:9090`
 *   **Grafana Dashboard:** Access Grafana at `http://localhost:3001` (default credentials: `admin`/`admin`)
 
