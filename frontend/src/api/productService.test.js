@@ -2,7 +2,7 @@ import { fetchProductById } from './productService';
 
 describe('productService', () => {
   const API_BASE_URL = 'http://localhost';
-  const productId = 'MLA123456789';
+  const productId = 'ABC123-Samsung-Galaxy-A55';
   const productUrl = `${API_BASE_URL}/api/items/${productId}`;
 
   // Mock the global fetch function

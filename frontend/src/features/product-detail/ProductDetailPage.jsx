@@ -39,7 +39,7 @@ export const ProductDetailPage = () => {
   }
 
   if (!product) {
-    return <div className="text-center text-gray-500 mt-10">No product data available. test with http://localhost/MLA123456789 </div>;
+    return <div className="text-center text-gray-500 mt-10">No product data available. test with http://localhost/ABC123-Samsung-Galaxy-A55 </div>;
   }
 
   return (

@@ -72,7 +72,7 @@ To deploy the frontend using Docker Compose (recommended for production-like env
 
 ## API Interaction
 
-The frontend application consumes the backend API for product details. It makes `GET` requests to the `/api/items/{id}` endpoint. For example, to fetch details for product ID `MLA123456789`, it will request `http://localhost/api/items/MLA123456789`.
+The frontend application consumes the backend API for product details. It makes `GET` requests to the `/api/items/{id}` endpoint. For example, to fetch details for product ID `ABC123-Samsung-Galaxy-A55`, it will request `http://localhost/api/items/ABC123-Samsung-Galaxy-A55`.
 
 Ensure your backend service is running and properly configured to handle these requests and that Traefik is routing them correctly. The `VITE_API_BASE_URL=http://localhost` setting ensures that API calls are routed through Traefik, which then directs them to the backend service.
 
@@ -93,7 +93,7 @@ The frontend is structured following a feature-first approach, promoting modular
 The frontend consumes the following primary API endpoint from the backend microservice:
 
 *   **GET `/api/items/{id}`**: Retrieves detailed information for a specific product by its ID.
-    *   **Example Request**: `http://localhost/api/items/MLA123456789`
+    *   **Example Request**: `http://localhost/api/items/ABC123-Samsung-Galaxy-A55`
     *   **Expected Response Structure**: The backend is expected to return a JSON object conforming to the detailed product structure defined in the `Product` domain model (see `backend/src/main/java/com/meli/product/domain/Product.java`). This includes nested objects for `price`, `seller`, `shipping`, `rating`, `key_features`, and `characteristics`.
 
 ### Professional Support Considerations

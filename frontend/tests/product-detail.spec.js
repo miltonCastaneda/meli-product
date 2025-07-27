@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Product Detail Page', () => {
-  const productId = 'MLA123456789';
+  const productId = 'ABC123-Samsung-Galaxy-A55';
   const productUrl = `/${productId}`;
 
   test('should display product details correctly after loading', async ({ page }) => {

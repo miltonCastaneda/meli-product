@@ -4,7 +4,7 @@ import * as productService from '../api/productService';
 
 describe('useProductData', () => {
   const mockProduct = {
-    id: 'MLA123456789',
+    id: 'ABC123-Samsung-Galaxy-A55',
     title: 'Test Product',
     price: { amount: 100, currency: 'US$' },
   };
@@ -20,7 +20,7 @@ describe('useProductData', () => {
   });
 
   test('should fetch product data successfully', async () => {
-    const { result } = renderHook(() => useProductData('MLA123456789'));
+    const { result } = renderHook(() => useProductData('ABC123-Samsung-Galaxy-A55'));
 
     // Initial state
     expect(result.current.loading).toBe(true);
@@ -33,14 +33,14 @@ describe('useProductData', () => {
     // Assert final state
     expect(result.current.product).toEqual(mockProduct);
     expect(result.current.error).toBeNull();
-    expect(productService.fetchProductById).toHaveBeenCalledWith('MLA123456789');
+    expect(productService.fetchProductById).toHaveBeenCalledWith('ABC123-Samsung-Galaxy-A55');
   });
 
   test('should handle API error', async () => {
     const errorMessage = 'Failed to fetch product';
     vi.spyOn(productService, 'fetchProductById').mockRejectedValue(new Error(errorMessage));
 
-    const { result } = renderHook(() => useProductData('MLA123456789'));
+    const { result } = renderHook(() => useProductData('ABC123-Samsung-Galaxy-A55'));
 
     // Initial state
     expect(result.current.loading).toBe(true);

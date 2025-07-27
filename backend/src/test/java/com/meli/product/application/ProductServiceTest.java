@@ -35,4 +35,15 @@ class ProductServiceTest {
                 .expectNext(product)
                 .verifyComplete();
     }
+
+    @Test
+    void getProductById_shouldThrowResourceNotFoundException() {
+        when(productRepository.findById("123")).thenReturn(Mono.empty());
+
+        Mono<Product> result = productService.getProductById("123");
+
+        StepVerifier.create(result)
+                .expectErrorMessage("Product with id 123 not found")
+                .verify();
+    }
 }

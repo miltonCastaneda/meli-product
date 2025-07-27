@@ -31,11 +31,11 @@ class JsonProductRepositoryTest {
 
     @Test
     void findById_whenProductExists_shouldReturnProduct() {
-        Mono<Product> productMono = repository.findById("123");
+        Mono<Product> productMono = repository.findById("ABC123-Samsung-Galaxy-A55");
 
         StepVerifier.create(productMono)
                 .assertNext(product -> {
-                    assertEquals("123", product.getId());
+                    assertEquals("ABC123-Samsung-Galaxy-A55", product.getId());
                     assertEquals("Samsung Galaxy A55 5G Dual SIM 256 GB azul oscuro 8 GB RAM", product.getTitle());
                 })
                 .verifyComplete();

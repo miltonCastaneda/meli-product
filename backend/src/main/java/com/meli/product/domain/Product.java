@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Schema(description = "Details about a product")
 public class Product {
-    @Schema(description = "Unique identifier of the product", example = "MLA123456789")
+    @Schema(description = "Unique identifier of the product", example = "ABC123-Samsung-Galaxy-A55")
     private String id;
     private String condition;
     @JsonProperty("sold_quantity")

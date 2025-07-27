@@ -3,7 +3,7 @@ import { ProductMiddleInfo } from './ProductMiddleInfo';
 
 describe('ProductMiddleInfo', () => {
   const mockProductData = {
-    id: 'MLA123456789',
+    id: 'ABC123-Samsung-Galaxy-A55',
     condition: 'Nuevo',
     sold_quantity: 1500,
     title: 'Samsung Galaxy A55 5G Dual SIM 256 GB azul oscuro 8 GB RAM',

@@ -56,7 +56,7 @@ Before running the application, ensure you have the following installed:
 Once all services are up and running:
 
 *   **Frontend Application:** Access the product page at `http://localhost`
-    *   **Test Route:** `http://localhost/MLA123456789` (example product detail page)
+    *   **Test Route:** `http://localhost/ABC123-Samsung-Galaxy-A55` (example product detail page)
 *   **Traefik Dashboard:** View the Traefik(api gateway) dashboard at `http://localhost:8080/dashboard`
 *   **Prometheus Dashboard:** Access Prometheus at `http://localhost:9090`
 *   **Grafana Dashboard:** Access Grafana at `http://localhost:3001` (default credentials: `admin`/`admin`)
