@@ -22,6 +22,8 @@ This repository contains a full-stack application simulating a Mercado Libre pro
 *   [Grafana Service Readme](grafana/README.md): Guide to visualization and dashboarding.
 *   [Loki Service Readme](loki/README.md): Details on log aggregation.
 *   [Promtail Service Readme](promtail/README.md): Information on log collection and shipping.
+*   [Guía de Logs y Troubleshooting por Servicio](docs/guia-de-logs-y-troubleshooting-por-servicio.md): Guía completa para el mantenimiento, soporte y troubleshooting de los servicios.
+*   [Arquitectura del Proyecto](docs/architecture.md): Descripción de la arquitectura de infraestructura y observabilidad del proyecto.
 
 ## Prerequisites
 
