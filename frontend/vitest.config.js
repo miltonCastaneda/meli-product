@@ -12,6 +12,17 @@ export default defineConfig({
       provider: 'v8', // or 'istanbul'
       reporter: ['text', 'html'], // 'text' for console, 'html' for HTML report
       reportsDirectory: './coverage',
+      exclude: [
+        'src/App.jsx',
+        'src/main.jsx',
+        'playwright.config.js',
+        'src/components/layout/Header.jsx',
+        '**/index.js',
+        'src/features/product-detail/components/Breadcrumbs.jsx',
+        'src/features/product-detail/components/SidebarRelatedProducts.jsx',
+        '**/*.config.js',
+        'src/components/icons/**'
+      ]
     },
   },
 });

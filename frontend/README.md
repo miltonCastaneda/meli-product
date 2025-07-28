@@ -1,118 +1,150 @@
-# Frontend Application
+# Frontend - Prototipo Página de Producto MercadoLibre
 
-This is a React.js application built with Vite, designed to display detailed product information, simulating a Mercado Libre product page.
+## 1. Visión General
+Este frontend es una SPA (Single Page Application) desarrollada en React y Vite, que simula la página de detalle de producto de MercadoLibre. Su objetivo es mostrar información de productos de manera moderna, responsiva y con una experiencia de usuario similar a la de un e-commerce real. Consume datos desde un backend vía API REST.
 
-## Technologies Used
+## 2. Arquitectura del Frontend
+- **React** para la construcción de interfaces y componentes reutilizables.
+- **Vite** como bundler y servidor de desarrollo ultrarrápido.
+- **Tailwind CSS** para estilos utilitarios y diseño responsivo.
+- **Testing** con Vitest y Testing Library.
 
-*   **React.js**: A JavaScript library for building user interfaces.
-*   **Vite**: A fast build tool that provides a lightning-fast development experience.
-*   **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
-*   **JavaScript/HTML/CSS**
+Flujo principal:
+```
+Usuario
+   |
+   v
+Frontend (React + Vite + Tailwind)
+   |
+   v
+API REST Backend (Spring Boot)
+```
 
-## Features
+## 3. Stack Tecnológico
+| Componente         | Tecnología Utilizada         |
+|--------------------|-----------------------------|
+| Framework UI       | React 19.x                  |
+| Bundler            | Vite 7.x                    |
+| Estilos            | Tailwind CSS 4.x            |
+| Testing            | Vitest, Testing Library      |
+| Linter             | ESLint                      |
+| E2E Testing        | Playwright                  |
 
-*   Displays comprehensive product details (title, price, images, description, seller info, shipping, etc.).
-*   Fetches product data dynamically from the backend API.
-*   Client-side routing for product detail pages.
-*   Responsive UI.
+## 4. Estructura de Carpetas
+```
+frontend/
+├── public/
+├── src/
+│   ├── api/
+│   ├── assets/
+│   ├── components/
+│   │   ├── icons/
+│   │   └── layout/
+│   ├── features/
+│   │   └── product-detail/
+│   │       └── components/
+│   ├── hooks/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── tests/
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-## How to Run
+## 5. Requisitos Previos
+- Node.js >= 18.x
+- npm >= 9.x (o yarn/pnpm)
+- (Opcional) Docker para despliegue en producción
 
-### 1. Local Development
+## 6. Configuración
+- Variables de entorno pueden definirse en `.env` (ejemplo: `VITE_API_BASE_URL` para apuntar al backend).
+- El archivo `vite.config.js` ya incluye configuración para React y Tailwind.
+- Los assets y favicons están en `public/`.
 
-To run the frontend application locally for development:
+## 7. Modo de Uso
+### Desarrollo local
+```sh
+npm install
+npm run dev
+```
+Esto levanta el frontend en modo desarrollo en [http://localhost:5173](http://localhost:5173) por defecto.
 
-1.  **Prerequisites**: Ensure you have Node.js (v18 or higher recommended) and npm (or Yarn) installed.
+### Build de producción
+```sh
+npm run build
+```
+El resultado se genera en la carpeta `dist/`.
 
-2.  **Navigate to the Frontend Directory**:
-    ```bash
-    cd frontend
-    ```
+### Previsualización del build
+```sh
+npm run preview
+```
 
-3.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
+### Linter y pruebas
+```sh
+npm run lint      # Linting
+npm run test      # Unit tests
+npm run coverage  # Cobertura de tests
+```
 
-4.  **Configure API Base URL**: Create a `.env` file in the `frontend/` directory with the following content. This tells the frontend where to find the backend API, routing through Traefik.
-    ```
-    VITE_API_BASE_URL=http://localhost
-    ```
+## 8. Puntos de Acceso y Rutas
+| Ruta                        | Descripción                                 |
+|-----------------------------|---------------------------------------------|
+| `/`                         | Página principal SPA                        |
+| `/[productId]-[productName]`| Página de detalle de producto               |
 
-5.  **Start the Development Server**:
-    ```bash
-    npm run dev
-    ```
-    This will start the application in development mode, typically accessible at `http://localhost:5173` (or another available port). The Vite development server will proxy API requests to `http://localhost/api` which Traefik will then route to your backend.
+## 9. Testing
+- Pruebas unitarias con Vitest y Testing Library.
+- Pruebas E2E con Playwright (ver carpeta `tests/`).
+- Cobertura de tests disponible con `npm run coverage`.
 
-### 2. Docker Compose Deployment
+## 10. Notas de Estilo y UX
+- El diseño es responsivo y mobile-first.
+- Se utilizan componentes reutilizables y composición de layouts.
+- El header y los íconos simulan la experiencia de MercadoLibre.
 
-To deploy the frontend using Docker Compose (recommended for production-like environments):
+## 11. Despliegue en Producción con Docker y Docker Compose
 
-1.  **Prerequisites**: Ensure you have Docker and Docker Compose installed on your system.
+El frontend está preparado para ser desplegado en producción usando Docker y Docker Compose. El proceso de despliegue genera una imagen optimizada que sirve los archivos estáticos de la aplicación mediante Nginx.
 
-2.  **Configure API Base URL**: Ensure the `.env` file in the `frontend/` directory is configured as described in the local development section (`VITE_API_BASE_URL=http://localhost`). This is crucial for the Dockerized frontend to correctly communicate with the backend via Traefik.
+### Pasos para el despliegue
+1. Asegúrate de tener Docker y Docker Compose instalados en el servidor de producción.
+2. Desde la raíz del proyecto, ejecuta:
+   ```sh
+   docker-compose up -d --build frontend
+   ```
+   Esto construirá la imagen del frontend y levantará el contenedor en modo background.
+3. El contenedor expone el frontend en el puerto configurado (por defecto, 80 o el que definas en el `docker-compose.yml`).
 
-3.  **Navigate to the Project Root Directory** (where `docker-compose.yml` is located):
-    ```bash
-    cd ..
-    ```
+### Ejemplo de acceso en producción
+- Accede a la aplicación desde un navegador en:
+  - http://localhost/ (si es local)
+  - http://<tu-dominio-o-ip>/ (en producción)
 
-4.  **Build the Frontend Docker Image**:
-    ```bash
-    docker-compose build frontend
-    ```
-    This command builds the Nginx-based Docker image for the frontend.
+### Ejemplo de consumo de la API desde el frontend
+El frontend realiza peticiones al backend para obtener los datos del producto. Ejemplo de endpoint consumido:
 
-5.  **Start the Frontend Service (and its dependencies)**:
-    ```bash
-    docker-compose up -d frontend
-    ```
-    This will start the frontend service in detached mode. Traefik (if not already running) will also be started as a dependency. The frontend will be accessible via Traefik at `http://localhost`.
+```
+GET http://localhost/api/items/ABC123-Samsung-Galaxy-A55
+```
 
-## API Interaction
+Respuesta esperada (ejemplo):
+```json
+{
+  "id": "ABC123-Samsung-Galaxy-A55",
+  "title": "Samsung Galaxy A55",
+  "price": 1200,
+  "images": ["https://..."],
+  "description": "Smartphone de última generación...",
+  ...
+}
+```
 
-The frontend application consumes the backend API for product details. It makes `GET` requests to the `/api/items/{id}` endpoint. For example, to fetch details for product ID `ABC123-Samsung-Galaxy-A55`, it will request `http://localhost/api/items/ABC123-Samsung-Galaxy-A55`.
+Asegúrate de que la variable de entorno `VITE_API_BASE_URL` apunte correctamente al backend en producción si usas un dominio o IP diferente.
 
-Ensure your backend service is running and properly configured to handle these requests and that Traefik is routing them correctly. The `VITE_API_BASE_URL=http://localhost` setting ensures that API calls are routed through Traefik, which then directs them to the backend service.
+---
 
-## Project Architecture and Professional Considerations
-
-### Frontend Structure
-
-The frontend is structured following a feature-first approach, promoting modularity and maintainability:
-
-*   `src/api/`: Contains service files for interacting with external APIs (e.g., `productService.js`).
-*   `src/assets/`: Static assets like images and fonts.
-*   `src/components/`: Reusable UI components, categorized by common (`common`), icons (`icons`), and layout (`layout`).
-*   `src/features/`: Contains self-contained features, each with its own components and logic (e.g., `product-detail`).
-*   `src/hooks/`: Custom React hooks for encapsulating reusable stateful logic (e.g., `useProductData.js`).
-
-### API Consumption
-
-The frontend consumes the following primary API endpoint from the backend microservice:
-
-*   **GET `/api/items/{id}`**: Retrieves detailed information for a specific product by its ID.
-    *   **Example Request**: `http://localhost/api/items/ABC123-Samsung-Galaxy-A55`
-    *   **Expected Response Structure**: The backend is expected to return a JSON object conforming to the detailed product structure defined in the `Product` domain model (see `backend/src/main/java/com/meli/product/domain/Product.java`). This includes nested objects for `price`, `seller`, `shipping`, `rating`, `key_features`, and `characteristics`.
-
-### Professional Support Considerations
-
-To professionally support and maintain this frontend application in a production environment, consider the following:
-
-*   **Environment Variables Management**: The `VITE_API_BASE_URL` is configured via a `.env` file. For production, ensure a robust system for managing environment variables (e.g., Kubernetes ConfigMaps, Docker Secrets, CI/CD pipeline injection) to avoid hardcoding sensitive information or environment-specific URLs.
-*   **Error Handling and Logging**: Implement comprehensive error boundaries in React to gracefully handle UI errors. Integrate with a centralized logging system (e.g., ELK stack, Grafana Loki) to capture frontend errors and user interactions for debugging and monitoring.
-*   **Performance Monitoring**: Utilize tools like Google Lighthouse, Web Vitals, or dedicated APM (Application Performance Monitoring) solutions (e.g., New Relic, Datadog) to continuously monitor frontend performance, identify bottlenecks, and ensure a smooth user experience.
-*   **Automated Testing**: Expand the existing test suite (currently `tests/example.spec.js`) to include:
-    *   **Unit Tests**: For individual components and utility functions (e.g., using Jest, React Testing Library).
-    *   **Integration Tests**: To verify the interaction between components and API calls.
-    *   **End-to-End (E2E) Tests**: To simulate user flows and ensure critical paths are functional (e.g., using Cypress, Playwright).
-*   **CI/CD Pipeline**: Establish a Continuous Integration/Continuous Deployment pipeline to automate:
-    *   Code linting and formatting checks.
-    *   Automated testing execution.
-    *   Docker image building and pushing to a container registry.
-    *   Deployment to staging and production environments.
-*   **Security Best Practices**: Regularly audit dependencies for vulnerabilities. Implement Content Security Policy (CSP) headers to mitigate XSS attacks. Ensure secure API communication (HTTPS).
-*   **Scalability**: While Nginx is efficient for serving static files, consider CDN (Content Delivery Network) integration for global distribution and improved loading times for users geographically distant from the server.
-*   **Observability**: Beyond basic logging, ensure metrics (e.g., request rates, error rates, latency) are collected from the Nginx server and the frontend application itself (e.g., using Prometheus exporters or custom metrics) to provide deep insights into its operational health.
-*   **Documentation**: Maintain up-to-date documentation for the frontend, including architecture diagrams, deployment procedures, and troubleshooting guides.
+Este README cubre todo lo necesario para desarrollar, probar y mantener el frontend del prototipo de página de producto inspirado en MercadoLibre.

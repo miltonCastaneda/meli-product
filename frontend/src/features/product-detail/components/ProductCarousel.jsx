@@ -49,13 +49,13 @@ export const ProductCarousel = ({ title, products, type = 'related', onAction })
         <div className="my-8">
             <h2 className="text-2xl font-light text-gray-700 mb-4">{title}</h2>
             <div className="relative">
-                <button onClick={() => scroll('left')} className="absolute -left-5 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition-transform duration-200 ease-in-out hover:scale-110 hidden lg:block">
+                <button onClick={() => scroll('left')} aria-label="Scroll left" className="absolute -left-5 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition-transform duration-200 ease-in-out hover:scale-110 hidden lg:block">
                     <ChevronLeft className="w-6 h-6 text-blue-500" />
                 </button>
                 <div ref={scrollRef} className="flex space-x-4 overflow-x-auto pb-4 no-scrollbar">
                     {products.map((p, i) => <Card key={i} product={p} />)}
                 </div>
-                 <button onClick={() => scroll('right')} className="absolute -right-5 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition-transform duration-200 ease-in-out hover:scale-110 hidden lg:block">
+                 <button onClick={() => scroll('right')} aria-label="Scroll right" className="absolute -right-5 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition-transform duration-200 ease-in-out hover:scale-110 hidden lg:block">
                     <ChevronRight className="w-6 h-6 text-blue-500" />
                 </button>
             </div>
