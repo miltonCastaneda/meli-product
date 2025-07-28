@@ -1,3 +1,5 @@
+[Volver al README Principal](../README.md)
+
 # Arquitectura del Proyecto MELI Product
 
 Este documento describe la arquitectura general del proyecto MELI Product, abarcando tanto la infraestructura de despliegue como los componentes de observabilidad.
@@ -31,4 +33,4 @@ Para garantizar la visibilidad sobre el comportamiento y el rendimiento de la ap
 
 ---
 
-**Nota:** Los archivos editables de los diagramas (`.drawio`) se encuentran en la carpeta `docs/` de este proyecto, permitiendo su fácil modificación y actualización.
+**Nota:** Los archivos editables de los diagramas (`.drawio`) se encuentran en la carpeta `docs/` de este proyecto, permitiendo su fácil modificación y actualización en la herramienta https://app.diagrams.net/ de forma gratuita.

@@ -1,31 +1,33 @@
-# Promtail Service
+[Volver al README Principal](../README.md)
 
-This directory contains the configuration for Promtail, an agent that ships the contents of local logs to a Loki instance.
+# Servicio Promtail
 
-## Overview
+Este directorio contiene la configuración para Promtail, un agente que envía el contenido de los logs locales a una instancia de Loki.
 
-Promtail is responsible for discovering log files on the host system, attaching labels to them, and sending them to Loki for aggregation and storage.
+## Resumen
 
-## Technologies Used
+Promtail es responsable de descubrir archivos de log en el sistema anfitrión, adjuntarles etiquetas y enviarlos a Loki para su agregación y almacenamiento.
 
-*   **Promtail**: Log collection agent from Grafana Labs.
+## Tecnologías Utilizadas
 
-## Configuration
+*   **Promtail**: Agente de recolección de logs de Grafana Labs.
 
-*   `promtail-config.yml`: The main configuration file for Promtail, defining where to find log files, how to parse them, and which labels to attach.
+## Configuración
 
-## Integration with Architecture
+*   `promtail-config.yml`: El archivo de configuración principal para Promtail, que define dónde encontrar los archivos de log, cómo analizarlos y qué etiquetas adjuntar.
 
-*   **Dockerized**: Promtail runs as a Docker container.
-*   **Docker Compose**: Orchestrated by `docker-compose.yml`.
-*   **Loki**: Pushes collected logs to the Loki service.
-*   **Docker Socket**: Mounts the Docker socket to discover logs from other containers.
-*   **Access Endpoint**: Promtail does not expose a direct user-facing endpoint.
-    *   **What you'll find**: Promtail operates in the background, collecting and shipping logs to Loki. Its status and logs can be viewed via Docker logs (`docker logs <promtail_container_id>`).
+## Integración con la Arquitectura
 
-## Professional Considerations
+*   **Contenerizado**: Promtail se ejecuta como un contenedor Docker.
+*   **Docker Compose**: Orquestado por `docker-compose.yml`.
+*   **Loki**: Envía los logs recolectados al servicio Loki.
+*   **Docker Socket**: Monta el socket de Docker para descubrir logs de otros contenedores.
+*   **Endpoint de Acceso**: Promtail no expone un endpoint directo para el usuario.
+    *   **Lo que encontrarás**: Promtail opera en segundo plano, recolectando y enviando logs a Loki. Su estado y logs se pueden ver a través de los logs de Docker (`docker logs <id_contenedor_promtail>`).
 
-*   **Log Discovery**: Configure Promtail to automatically discover logs from new containers or services.
-*   **Labeling**: Use meaningful labels to categorize logs, making them easier to query in Loki and Grafana.
-*   **Resource Usage**: Monitor Promtail's resource consumption to ensure it doesn't impact the performance of the applications it's monitoring.
-*   **Error Handling**: Implement robust error handling and retry mechanisms for log shipping to prevent data loss.
+## Consideraciones Profesionales
+
+*   **Descubrimiento de Logs**: Configura Promtail para descubrir automáticamente los logs de nuevos contenedores o servicios.
+*   **Etiquetado**: Utiliza etiquetas significativas para categorizar los logs, facilitando su consulta en Loki y Grafana.
+*   **Uso de Recursos**: Monitorea el consumo de recursos de Promtail para asegurar que no afecte el rendimiento de las aplicaciones que está monitoreando.
+*   **Manejo de Errores**: Implementa mecanismos robustos de manejo de errores y reintentos para el envío de logs para prevenir la pérdida de datos.

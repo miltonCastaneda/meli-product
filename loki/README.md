@@ -1,31 +1,33 @@
-# Loki Service
+[Volver al README Principal](../README.md)
 
-This directory contains the configuration for Loki, a horizontally scalable, highly available, multi-tenant log aggregation system inspired by Prometheus.
+# Servicio Loki
 
-## Overview
+Este directorio contiene la configuración para Loki, un sistema de agregación de logs escalable horizontalmente, de alta disponibilidad y multi-inquilino, inspirado en Prometheus.
 
-Loki is designed to store and query logs from all services in the application. It's optimized for cost-effectiveness and simplicity, indexing only metadata (labels) rather than the full log content.
+## Resumen
 
-## Technologies Used
+Loki está diseñado para almacenar y consultar logs de todos los servicios en la aplicación. Está optimizado para la rentabilidad y la simplicidad, indexando solo metadatos (etiquetas) en lugar del contenido completo del log.
 
-*   **Loki**: Log aggregation system from Grafana Labs.
+## Tecnologías Utilizadas
 
-## Configuration
+*   **Loki**: Sistema de agregación de logs de Grafana Labs.
 
-*   `local-config.yaml`: The main configuration file for Loki, defining its storage, ingester, and querier settings.
+## Configuración
 
-## Integration with Architecture
+*   `local-config.yaml`: El archivo de configuración principal para Loki, que define su almacenamiento, ingester y configuraciones de querier.
 
-*   **Dockerized**: Loki runs as a Docker container.
-*   **Docker Compose**: Orchestrated by `docker-compose.yml`.
-*   **Promtail**: Logs are pushed to Loki by Promtail agents running alongside the application services.
-*   **Grafana**: Loki is configured as a data source in Grafana, allowing users to query and visualize logs.
-*   **Access Endpoint**: `http://localhost:3100`
-    *   **What you'll find**: Loki's HTTP API for log ingestion and querying. Typically accessed by Promtail and Grafana, not directly by users.
+## Integración con la Arquitectura
 
-## Professional Considerations
+*   **Contenerizado**: Loki se ejecuta como un contenedor Docker.
+*   **Docker Compose**: Orquestado por `docker-compose.yml`.
+*   **Promtail**: Los logs son enviados a Loki por los agentes de Promtail que se ejecutan junto a los servicios de la aplicación.
+*   **Grafana**: Loki está configurado como una fuente de datos en Grafana, permitiendo a los usuarios consultar y visualizar logs. Para aprender a consultar logs por nombre de contenedor en Grafana, consulta la sección ["Acceso y Uso del Dashboard de Grafana"](../grafana/README.md#acceso-y-uso-del-dashboard-de-grafana) en el README de Grafana.
+*   **Endpoint de Acceso**: `http://localhost:3100`
+    *   **Lo que encontrarás**: La API HTTP de Loki para la ingesta y consulta de logs. Típicamente accedida por Promtail y Grafana, no directamente por los usuarios.
 
-*   **Scalability**: Loki is designed for horizontal scalability, making it suitable for large-scale log aggregation.
-*   **Cost-Effective**: By indexing only labels, Loki offers a more cost-effective solution for log storage compared to full-text indexing systems.
-*   **Persistence**: For production, ensure Loki's data is persisted to a durable storage solution (e.g., S3, GCS) to prevent data loss upon container restarts or failures.
-*   **Retention Policies**: Implement appropriate log retention policies to manage storage costs and compliance requirements.
+## Consideraciones Profesionales
+
+*   **Escalabilidad**: Loki está diseñado para la escalabilidad horizontal, lo que lo hace adecuado para la agregación de logs a gran escala.
+*   **Rentabilidad**: Al indexar solo etiquetas, Loki ofrece una solución más rentable para el almacenamiento de logs en comparación con los sistemas de indexación de texto completo.
+*   **Persistencia**: Para producción, asegúrate de que los datos de Loki se persistan en una solución de almacenamiento duradera (por ejemplo, S3, GCS) para evitar la pérdida de datos en caso de reinicios o fallos del contenedor.
+*   **Políticas de Retención**: Implementa políticas de retención de logs adecuadas para gestionar los costos de almacenamiento y los requisitos de cumplimiento.

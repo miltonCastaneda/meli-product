@@ -1,40 +1,74 @@
-# Traefik Service
+[Volver al README Principal](../README.md)
 
-This directory contains the configuration for Traefik, a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+# Servicio Traefik
 
-## Overview
+Este directorio contiene la configuración para Traefik, un moderno proxy inverso HTTP y balanceador de carga que facilita el despliegue de microservicios.
 
-Traefik acts as the API Gateway for the application, routing incoming requests to the correct backend services (frontend, backend API). It automatically discovers services running in Docker and applies routing rules based on labels defined in `docker-compose.yml`.
+## Resumen
 
-## Technologies Used
+Traefik actúa como el API Gateway para la aplicación, enrutando las solicitudes entrantes a los servicios correctos (frontend, API backend). Descubre automáticamente los servicios que se ejecutan en Docker y aplica reglas de enrutamiento basadas en las etiquetas definidas en `docker-compose.yml`.
 
-*   **Traefik**: Edge Router and API Gateway.
+## Tecnologías Utilizadas
 
-## Configuration
+*   **Traefik**: Enrutador de Borde y API Gateway.
 
-Traefik's configuration is primarily defined through command-line arguments and Docker labels in the `docker-compose.yml` file. Key configurations include:
+## Configuración
 
-*   **Providers**: Configured to use Docker as a provider, enabling automatic service discovery.
-*   **Entrypoints**: Defines the ports Traefik listens on (e.g., `web` on port 80).
-*   **Routers**: Rules for routing incoming requests to specific services based on hostnames and path prefixes.
-*   **Middlewares**: Applied to requests for features like retries and circuit breakers.
-*   **Metrics**: Configured to expose Prometheus metrics for monitoring.
+La configuración de Traefik se define principalmente a través de argumentos de línea de comandos y etiquetas de Docker en el archivo `docker-compose.yml`. Las configuraciones clave incluyen:
 
-## Integration with Architecture
+*   **Proveedores**: Configurado para usar Docker como proveedor, lo que permite el descubrimiento automático de servicios.
+*   **Puntos de Entrada (Entrypoints)**: Define los puertos en los que Traefik escucha (por ejemplo, `web` en el puerto 80).
+*   **Enrutadores (Routers)**: Reglas para enrutar las solicitudes entrantes a servicios específicos basadas en nombres de host y prefijos de ruta.
+*   **Middlewares**: Aplicados a las solicitudes para características como reintentos y disyuntores (circuit breakers).
+*   **Métricas**: Configurado para exponer métricas de Prometheus para monitoreo.
 
-*   **Dockerized**: Traefik runs as a Docker container.
-*   **Docker Compose**: Orchestrated by `docker-compose.yml`.
-*   **Frontend & Backend Exposure**: Exposes the frontend application on `http://localhost` and routes API calls to the backend service via `/api` path prefix.
-*   **Monitoring**: Exposes metrics that are scraped by Prometheus.
-*   **Access Endpoint (Dashboard)**: `http://localhost:8080/dashboard`
-    *   **What you'll find**: The Traefik dashboard, providing a visual overview of your configured routers, services, and middlewares, along with real-time traffic metrics.
-    *   **Access Endpoint (Web UI)**: `http://localhost`
-        *   **What you'll find**: The frontend application, served by Traefik.
+## Integración con la Arquitectura
 
-## Professional Considerations
+*   **Contenerizado**: Traefik se ejecuta como un contenedor Docker.
+*   **Docker Compose**: Orquestado por `docker-compose.yml`.
+*   **Exposición de Frontend y Backend**: Expone la aplicación frontend en `http://localhost` y enruta las llamadas a la API al servicio backend a través del prefijo de ruta `/api`.
+*   **Monitoreo**: Expone métricas que son recolectadas por Prometheus.
+*   **Endpoint de Acceso (Dashboard)**: `http://localhost:8080/dashboard`
+    *   **Lo que encontrarás**: El dashboard de Traefik, que proporciona una visión general visual de tus enrutadores, servicios y middlewares configurados, junto con métricas de tráfico en tiempo real.
+*   **Endpoint de Acceso (UI Web)**: `http://localhost`
+    *   **Lo que encontrarás**: La aplicación frontend, servida por Traefik.
 
-*   **Dynamic Configuration**: Traefik's ability to dynamically configure routing based on Docker labels simplifies service deployment and management.
-*   **Load Balancing**: Provides built-in load balancing across multiple instances of a service.
-*   **Security**: Can be configured for SSL/TLS termination, authentication, and other security features.
-*   **Observability**: Rich metrics and a user-friendly dashboard provide excellent visibility into traffic flow and service health.
-*   **High Availability**: Can be deployed in a highly available setup for production environments.
+## Acceso y Verificación del Dashboard de Traefik
+
+El Dashboard de Traefik es una interfaz de usuario web que proporciona una visión en tiempo real del estado de tus servicios, enrutadores y middlewares. Es una herramienta invaluable para el monitoreo y la depuración.
+
+### Cómo Acceder al Dashboard
+
+Asegúrate de que el servicio Traefik esté en ejecución (usando `docker-compose up -d`). Luego, abre tu navegador web y navega a la siguiente URL:
+
+```
+http://localhost:8080/dashboard
+```
+
+### Qué Verificar en el Dashboard
+
+Una vez en el dashboard, puedes revisar las siguientes secciones para verificar la configuración y el estado de Traefik:
+
+*   **Routers (Enrutadores):**
+    *   Verifica que todos los enrutadores esperados (por ejemplo, para `backend` y `frontend`) estén listados y en estado "OK".
+    *   Haz clic en cada enrutador para ver sus reglas (`Rule`), puntos de entrada (`Entrypoints`) y servicios asociados (`Service`). Asegúrate de que las reglas de enrutamiento (`Host`, `PathPrefix`) coincidan con lo esperado.
+*   **Services (Servicios):**
+    *   Confirma que los servicios `backend` y `frontend` estén detectados y en estado "OK".
+    *   Revisa los detalles de cada servicio, incluyendo los servidores (`Servers`) y el estado de sus health checks. Si un servicio no está saludable, Traefik lo indicará aquí.
+*   **Middlewares:**
+    *   Verifica que los middlewares configurados en `docker-compose.yml` (como `resilience-middlewares`, `retry-policy`, `circuit-breaker`) estén presentes y correctamente aplicados a los enrutadores.
+    *   Puedes inspeccionar la configuración de cada middleware para asegurarte de que los parámetros (ej., `attempts` para `retry`, `expression` para `circuitbreaker`) sean correctos.
+*   **Entrypoints (Puntos de Entrada):**
+    *   Asegúrate de que los puntos de entrada (`web` en el puerto 80) estén escuchando correctamente.
+*   **HTTP/TCP:**
+    *   El dashboard te permite alternar entre la configuración HTTP y TCP. Para esta aplicación, la configuración principal estará bajo HTTP.
+
+El dashboard es una herramienta poderosa para diagnosticar problemas de enrutamiento, verificar la salud de los servicios y entender cómo Traefik está manejando el tráfico.
+
+## Consideraciones Profesionales
+
+*   **Configuración Dinámica**: La capacidad de Traefik para configurar dinámicamente el enrutamiento basado en etiquetas de Docker simplifica el despliegue y la gestión de servicios.
+*   **Balanceo de Carga**: Proporciona balanceo de carga incorporado entre múltiples instancias de un servicio.
+*   **Seguridad**: Puede configurarse para terminación SSL/TLS, autenticación y otras características de seguridad.
+*   **Observabilidad**: Las métricas enriquecidas y un dashboard fácil de usar proporcionan una excelente visibilidad del flujo de tráfico y la salud del servicio.
+*   **Alta Disponibilidad**: Puede desplegarse en una configuración de alta disponibilidad para entornos de producción.

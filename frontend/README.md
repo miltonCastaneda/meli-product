@@ -1,7 +1,9 @@
+[Volver al README Principal](../README.md)
+
 # Frontend - Prototipo Página de Producto MercadoLibre
 
 ## 1. Visión General
-Este frontend es una SPA (Single Page Application) desarrollada en React y Vite, que simula la página de detalle de producto de MercadoLibre. Su objetivo es mostrar información de productos de manera moderna, responsiva y con una experiencia de usuario similar a la de un e-commerce real. Consume datos desde un backend vía API REST.
+Este frontend es una SPA (Single Page Application) desarrollada en React y Vite, que simula la página de detalle de producto de MercadoLibre. Su objetivo es mostrar información del producto de manera moderna, responsiva y con una experiencia de usuario similar a la de un e-commerce real. Consume los datos necesarios desde un backend vía API REST.
 
 ## 2. Arquitectura del Frontend
 - **React** para la construcción de interfaces y componentes reutilizables.
@@ -94,7 +96,7 @@ npm run coverage  # Cobertura de tests
 | Ruta                        | Descripción                                 |
 |-----------------------------|---------------------------------------------|
 | `/`                         | Página principal SPA                        |
-| `/[productId]-[productName]`| Página de detalle de producto               |
+| `/[productId]`| Página de detalle de producto               |
 
 ## 9. Testing
 - Pruebas unitarias con Vitest y Testing Library.
@@ -144,6 +146,16 @@ Respuesta esperada (ejemplo):
 ```
 
 Asegúrate de que la variable de entorno `VITE_API_BASE_URL` apunte correctamente al backend en producción si usas un dominio o IP diferente.
+
+---
+
+### Ejemplo de url que se consume desde el navegador para consultar un producto dado
+
+```
+http://localhost/ABC123-Samsung-Galaxy-A55
+```
+
+
 
 ---
 

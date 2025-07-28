@@ -1,71 +1,63 @@
-# MELI Product Application
+# Aplicación de Producto MELI
 
-This repository contains a full-stack application simulating a Mercado Libre product page, along with monitoring tools.
+Este repositorio alberga una aplicación de demostración que simula una página de producto de Mercado Libre. Su propósito principal es presentar la informacion detallada de un producto consultado, para ello se consume un endpoint REST quien consulta la informacion requerida en un archivo JSON. La lógica del frontend se limita a la consulta y visualización de este detalle. Además, el proyecto integra herramientas robustas como Traefik, Loki, Prometheus y Grafana para garantizar una completa observabilidad, monitoreo y escalabilidad de los servicios.
 
-## Project Structure
 
-*   `backend/`: Spring Boot application providing product APIs.
-*   `frontend/`: React.js application for the product display.
-*   `docker-compose.yml`: Defines the multi-container Docker application.
-*   `prometheus/`: Prometheus configuration for monitoring.
-*   `grafana/`: Grafana configuration for visualizing metrics.
-*   `docs/`: Project documentation.
 
-## Documentation
+## Documentación
 
-*   [Backend Microservice Architecture](docs/backend-architecture.md): Detailed explanation of the backend's hexagonal architecture.
-*   [Backend Microservice Runbook](docs/backend-runbook.md): Comprehensive guide for setup, testing, maintenance, and support of the backend.
-*   [Frontend Application Readme](frontend/README.md): Detailed instructions for running and consuming the frontend application.
-*   [Backend Service Readme](backend/README.md): Overview, APIs, and integration details for the backend microservice.
-*   [Traefik Service Readme](traefik/README.md): Details on the API Gateway and load balancer.
-*   [Prometheus Service Readme](prometheus/README.md): Information on metrics collection and monitoring.
-*   [Grafana Service Readme](grafana/README.md): Guide to visualization and dashboarding.
-*   [Loki Service Readme](loki/README.md): Details on log aggregation.
-*   [Promtail Service Readme](promtail/README.md): Information on log collection and shipping.
-*   [Guía de Logs y Troubleshooting por Servicio](docs/guia-de-logs-y-troubleshooting-por-servicio.md): Guía completa para el mantenimiento, soporte y troubleshooting de los servicios.
 *   [Arquitectura del Proyecto](docs/architecture.md): Descripción de la arquitectura de infraestructura y observabilidad del proyecto.
+*   [Guía de Logs y Troubleshooting por Servicio](docs/guia-de-logs-y-troubleshooting-por-servicio.md): Guía completa para el mantenimiento, soporte y troubleshooting de los servicios.
+*   [ Backend](backend/README.md): Resumen, APIs, detalles de integración y guía completa para la configuración, pruebas, mantenimiento y soporte del backend.
+*   [ Frontend](frontend/README.md): Instrucciones detalladas para ejecutar y consumir la aplicación frontend.
+*   [ Traefik](traefik/README.md): Detalles sobre el API Gateway y balanceador de carga.
+*   [ Prometheus](prometheus/README.md): Información sobre la recolección y monitoreo de métricas.
+*   [ Grafana](grafana/README.md): Guía para la visualización y creación de dashboards.
+*   [ Loki](loki/README.md): Detalles sobre la agregación de logs.
+*   [ Promtail](promtail/README.md): Información sobre la recolección y envío de logs.
 
-## Prerequisites
 
-Before running the application, ensure you have the following installed:
+## Prerrequisitos
+
+Antes de ejecutar la aplicación, asegúrate de tener lo siguiente instalado:
 
 *   [Docker](https://www.docker.com/get-started)
 *   [Docker Compose](https://docs.docker.com/compose/install/)
 
-## How to Run the Entire Project
+## Cómo Ejecutar el Proyecto Completo
 
-1.  **Clone the repository:**
+1.  **Clonar el repositorio:**
 
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/miltonCastaneda/meli-product.git
     cd meli-product
     ```
 
-2.  **Build and run the Docker containers:**
+2.  **Construir y ejecutar los contenedores Docker:**
 
-    Navigate to the root directory of the project (where `docker-compose.yml` is located) and run:
+    Navega al directorio raíz del proyecto (donde se encuentra `docker-compose.yml`) y ejecuta:
 
     ```bash
     docker-compose up --build
     ```
 
-    This command will:
-    *   Build the `backend` and `frontend` Docker images.
-    *   Start all services defined in `docker-compose.yml` (Traefik, backend, frontend, Prometheus, Grafana).
+    Este comando:
+    *   Construirá las imágenes Docker de `backend` y `frontend`.
+    *   Iniciará todos los servicios definidos en `docker-compose.yml` (Traefik, backend, frontend, Prometheus, Grafana).
 
-## Accessing the Applications
+## Accediendo a las Aplicaciones
 
-Once all services are up and running:
+Una vez que todos los servicios estén en funcionamiento:
 
-*   **Frontend Application:** Access the product page at `http://localhost`
-    *   **Test Route:** `http://localhost/ABC123-Samsung-Galaxy-A55` (example product detail page)
-*   **Traefik Dashboard:** View the Traefik(api gateway) dashboard at `http://localhost:8080/dashboard`
-*   **Prometheus Dashboard:** Access Prometheus at `http://localhost:9090`
-*   **Grafana Dashboard:** Access Grafana at `http://localhost:3001` (default credentials: `admin`/`admin`)
+*   **Aplicación Frontend:** Accede a la página del producto en `http://localhost`
+    *   **Ruta de Prueba:** `http://localhost/ABC123-Samsung-Galaxy-A55` (ejemplo de página de detalle de producto)
+*   **Dashboard de Traefik:** Visualiza el dashboard de Traefik (API Gateway) en `http://localhost:8080/dashboard`
+*   **Dashboard de Prometheus:** Accede a Prometheus en `http://localhost:9090`
+*   **Dashboard de Grafana:** Accede a Grafana en `http://localhost:3001` (credenciales por defecto: `admin`/`admin`)
 
-## Stopping the Applications
+## Deteniendo las Aplicaciones
 
-To stop all running Docker containers and remove the networks created by `docker-compose`:
+Para detener todos los contenedores Docker en ejecución y eliminar las redes creadas por `docker-compose`:
 
 ```bash
 docker-compose down
