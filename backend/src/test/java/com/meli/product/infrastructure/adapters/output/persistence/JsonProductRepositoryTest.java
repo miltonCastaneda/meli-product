@@ -2,6 +2,7 @@ package com.meli.product.infrastructure.adapters.output.persistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.product.domain.Product;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,22 +12,40 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 
 @ExtendWith(MockitoExtension.class)
 class JsonProductRepositoryTest {
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapper mockedObjectMapper;
 
     private JsonProductRepository repository;
+    private Path tempFilePath;
 
     @BeforeEach
-    void setUp() {
-        repository = new JsonProductRepository(new ObjectMapper()); // Use a real ObjectMapper for successful tests
+    void setUp() throws IOException {
+        // Create a temporary data.json file for testing
+        tempFilePath = Files.createTempFile("test_data", ".json");
+        String jsonContent = "{\"products\": [{\"id\": \"ABC123-Samsung-Galaxy-A55\", \"title\": \"Samsung Galaxy A55 5G Dual SIM 256 GB azul oscuro 8 GB RAM\"}]}";
+        Files.write(tempFilePath, jsonContent.getBytes());
+
+        // Use a real ObjectMapper for the repository in most tests
+        repository = new JsonProductRepository(new ObjectMapper(), tempFilePath.toString());
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        // Clean up the temporary file
+        Files.deleteIfExists(tempFilePath);
     }
 
     @Test
@@ -50,16 +69,16 @@ class JsonProductRepositoryTest {
     }
 
     @Test
-    void findById_whenIOExceptionOccurs_shouldThrowRuntimeException() throws IOException {
-        // Use the mocked ObjectMapper for this specific test case
-        repository = new JsonProductRepository(objectMapper);
-        when(objectMapper.readTree(any(java.io.InputStream.class))).thenThrow(new IOException("Test IOException"));
+    void constructor_whenIOExceptionOccurs_shouldThrowRuntimeException() throws IOException {
+        // Configure the mocked ObjectMapper to throw an IOException when readTree is called
+        doThrow(new IOException("Test IOException")).when(mockedObjectMapper).readTree(any(java.io.InputStream.class));
 
-        Mono<Product> productMono = repository.findById("123");
+        // Assert that constructing the repository throws a RuntimeException
+        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+            new JsonProductRepository(mockedObjectMapper, tempFilePath.toString());
+        });
 
-        StepVerifier.create(productMono)
-                .expectErrorMatches(throwable -> throwable instanceof RuntimeException &&
-                        throwable.getMessage().contains("Error reading data.json"))
-                .verify();
+        // Verify the exception message
+        assertEquals("Error reading data.json from " + tempFilePath.toString(), thrown.getMessage());
     }
 }
