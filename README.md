@@ -15,6 +15,7 @@ Este repositorio alberga una aplicación de demostración que simula una página
 *   [ Grafana](grafana/README.md): Guía para la visualización y creación de dashboards.
 *   [ Loki](loki/README.md): Detalles sobre la agregación de logs.
 *   [ Promtail](promtail/README.md): Información sobre la recolección y envío de logs.
+*   [Desafíos y Soluciones](docs/desafios-y-soluciones-meli-product.md): Un recorrido por los retos técnicos y las soluciones implementadas en el proyecto.
 
 
 ## Prerrequisitos
