@@ -5,7 +5,7 @@ export const RightSidePanels = ({ seller, onAction }) => {
   return (
     <div className="space-y-4">
       {/* Panel Tienda Oficial */}
-      <div className="border rounded-md p-4">
+      <div className="border border-gray-200 rounded-md p-4">
         <h4 className="font-semibold mb-2">Tienda Oficial</h4>
         <div className="flex space-x-4">
           <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-xl">{seller.name.charAt(0)}</div>
@@ -33,13 +33,13 @@ export const RightSidePanels = ({ seller, onAction }) => {
       </div>
 
       {/* Panel Otras Opciones */}
-      <div className="border rounded-md p-4">
+      <div className="border border-gray-200 rounded-md p-4">
           <h4 className="font-semibold mb-2">Otras opciones de compra</h4>
           <a href="#" className="text-blue-500 text-sm">Ver 3 opciones desde US$ 439</a>
       </div>
 
       {/* Panel Medios de Pago */}
-      <div className="border rounded-md p-4">
+      <div className="border border-gray-200 rounded-md p-4">
           <h4 className="font-semibold mb-2">Medios de pago</h4>
           <div className="bg-green-100 text-green-700 p-2 rounded-md text-sm font-semibold">¡Paga en hasta 12 cuotas sin interés!</div>
           <div className="mt-4">

@@ -13,7 +13,7 @@ export const ProductCarousel = ({ title, products, type = 'related', onAction })
     const Card = ({ product }) => {
         if (type === 'brand') {
             return (
-                <div className="flex items-center space-x-4 border rounded-lg p-2 min-w-[300px] hover:shadow-md transition-shadow cursor-pointer" onClick={onAction}>
+                <div className="flex items-center space-x-4 border border-gray-200 rounded-lg p-2 min-w-[300px] hover:shadow-md transition-shadow cursor-pointer" onClick={onAction}>
                     <img src={product.image} alt={product.title} className="w-20 h-20 object-contain"/>
                     <div className="text-sm">
                         <p>{product.title} {product.specs}</p>
@@ -26,7 +26,7 @@ export const ProductCarousel = ({ title, products, type = 'related', onAction })
         }
         
         return (
-            <div className="border rounded-lg min-w-[220px] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={onAction}>
+            <div className="border border-gray-200 rounded-lg min-w-[220px] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={onAction}>
                 <div className="relative">
                     <img src={product.image} alt={product.title} className="w-full h-48 object-cover"/>
                     {product.promo && <div className="absolute top-2 left-2 bg-gray-800 text-white text-xs px-2 py-1 rounded">{product.promo}</div>}

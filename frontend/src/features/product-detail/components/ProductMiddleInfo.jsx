@@ -50,7 +50,7 @@ export const ProductMiddleInfo = ({ data }) => {
                 </div>
             </div>
 
-            <div className="hidden lg:block my-6 border-t border-b py-4">
+            <div className="hidden lg:block my-6 border-t border-b border-gray-200  py-4">
                 <h3 className="font-semibold mb-2">Lo que tienes que saber de este producto</h3>
                 <ul className="list-disc list-inside text-sm space-y-2 text-gray-600">
                     {data.key_features.map((feature, i) => <li key={i}>{feature}</li>)}

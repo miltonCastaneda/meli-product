@@ -8,7 +8,7 @@ export const SidebarRelatedProducts = ({ onAction }) => {
         { image: 'https://http2.mlstatic.com/D_Q_NP_794553-MLA72023305481_092023-AC.webp', title: 'Motorola G85 5g 256Gb Gris Storm', price: 'U$S 329', discount: '10% OFF' },
     ];
     return (
-        <div className="border rounded-md p-4">
+        <div className="border border-gray-200 rounded-md p-4">
             <h4 className="font-semibold mb-4">Productos relacionados</h4>
             <div className="space-y-4">
                 {products.map((p, i) => (

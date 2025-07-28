@@ -75,7 +75,7 @@ export const ProductDetailPage = () => {
 
 
                 {/* --- SECCIÓN INFERIOR: CAROUSELES, DESCRIPCIÓN Y PANELES DERECHOS --- */}
-                <div className="mt-10 grid grid-cols-1 lg:grid-cols-10 gap-8 border-t pt-8">
+                <div className="mt-10 grid grid-cols-1 lg:grid-cols-10 gap-8 border-t border-gray-200 border-pt-8">
                     <div className="lg:col-span-8">
                         <ProductCarousel title="Productos relacionados" products={relatedProductsData} onAction={handleActionClick} />
                         <ProductCarousel title="Productos de Samsung" products={brandProductsData} type="brand" onAction={handleActionClick} />
